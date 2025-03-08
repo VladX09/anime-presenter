@@ -1,0 +1,13 @@
+title: My Awesome Presentation
+src: ./video.mp4
+sections:
+  - label: Introduction
+    slides:
+      - label: "Title"
+        offset: 0
+      - offset: 100
+  - slides:
+      - offset: 200
+      - offset: 300
+      - offset: 450
+        label: "End"
