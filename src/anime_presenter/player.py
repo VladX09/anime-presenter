@@ -118,17 +118,18 @@ class Player:
             case (pygame.KEYDOWN, pygame.KMOD_NONE, pygame.K_q):
                 self.stop()
             case (pygame.KEYDOWN, pygame.KMOD_NONE, pygame.K_SPACE):
-                self._video.resume()
+                if self._navigator.state.next:  # Stop on the last slide
+                    self._video.resume()
             case (pygame.KEYDOWN, pygame.KMOD_NONE, pygame.K_RIGHT):
                 frame = self._navigator.apply(Commands.to_next_slide)
                 self._move_to_frame(frame, events)
             case (pygame.KEYDOWN, pygame.KMOD_NONE, pygame.K_LEFT):
                 frame = self._navigator.apply(Commands.to_prev_slide) or 0
                 self._move_to_frame(frame, events)
-            case (pygame.KEYDOWN, mod, pygame.K_RIGHT) if mod & pygame.KMOD_CTRL:
+            case (pygame.KEYDOWN, mod, pygame.K_RIGHT) if mod & pygame.KMOD_SHIFT:
                 frame = self._navigator.apply(Commands.to_next_section)
                 self._move_to_frame(frame, events)
-            case (pygame.KEYDOWN, mod, pygame.K_LEFT) if mod & pygame.KMOD_CTRL:
+            case (pygame.KEYDOWN, mod, pygame.K_LEFT) if mod & pygame.KMOD_SHIFT:
                 frame = self._navigator.apply(Commands.to_prev_section) or 0
                 self._move_to_frame(frame, events)
             case (pygame.KEYDOWN, pygame.KMOD_NONE, pygame.K_b):
